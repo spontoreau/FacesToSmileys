@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+using FacesToSmileys.Models;
 using SkiaSharp;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
-    public class ImageProcessingService
+    public class ImageProcessingService : IImageProcessingService
     {
         SKImage Image { get; set; }
         SKImageInfo ImageInfo { get; set; }
@@ -35,21 +36,26 @@ namespace FacesToSmileys.Services
 
             Surface = SKSurface.Create(ImageInfo);
             Paint = new SKPaint();
+            Paint.Color = SKColor.Parse("#2ecc71");
             Surface.Canvas.DrawImage(Image, new SKRect(0f, 0f, ImageInfo.Width, ImageInfo.Height), new SKRect(0f, 0f, ImageInfo.Width, ImageInfo.Height), Paint);
             IsOpen = true;
         }
 
-        public void DrawDebugRect(int x, int y, int width, int height, string hexColor)
+        public void DrawDebugRect(Rectangle rectangle)
         {
             if (!IsOpen)
                 throw new InvalidOperationException("No image opened");
             
-            Paint.Color = SKColor.Parse(hexColor);
+            DrawDebugLine(rectangle.TopLeft, rectangle.TopRight);       //TOP line
+            DrawDebugLine(rectangle.TopLeft, rectangle.BottomLeft);     //LEFT line
+            DrawDebugLine(rectangle.TopRight, rectangle.BottomRight);   //RIGHT line
+            DrawDebugLine(rectangle.BottomLeft, rectangle.BottomRight); //BOTTOM line
+        }
 
-            Surface.Canvas.DrawLine(x, y, x + width, y, Paint);//TOP line
-            Surface.Canvas.DrawLine(x, y, x, y + height, Paint);//LEFT line
-            Surface.Canvas.DrawLine(x + width, y, x + width, y + height, Paint);//RIGHT line
-            Surface.Canvas.DrawLine(x , y + height, x + width, y + height, Paint);//BOTTOM line
+
+        public void DrawDebugLine(Point start, Point end)
+        {
+            Surface.Canvas.DrawLine(start.X, start.Y, end.X, end.Y, Paint);
         }
 
         public byte[] GetImage()

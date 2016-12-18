@@ -10,9 +10,9 @@ namespace FacesToSmileys.ViewModels
 {
     public class TakePhotoViewModel : ViewModel
     {
-        PhotoService PhotoService { get; }
-        EmotionService EmotionService { get; }
-        ImageProcessingService ImageProcessingService { get; }
+        IPhotoService PhotoService { get; }
+        IDetectionService DetectionService { get; }
+        IImageProcessingService ImageProcessingService { get; }
 
         byte[] _photo;
 
@@ -24,13 +24,11 @@ namespace FacesToSmileys.ViewModels
 
         public ICommand TakePhotoCommand { get; private set; }
 
-        public TakePhotoViewModel()
+        public TakePhotoViewModel(IPhotoService photoService, IImageProcessingService imageProcessiongService, IDetectionService detectionService)
         {
-            PhotoService = new PhotoService();
-            ImageProcessingService = new ImageProcessingService();
-            EmotionService = new EmotionService("");//set your api access key here
-
-
+            PhotoService = photoService;
+            ImageProcessingService = imageProcessiongService;
+            DetectionService = detectionService;
             TakePhotoCommand = new Command(async () => await TakePhoto());
         }
 
@@ -40,11 +38,11 @@ namespace FacesToSmileys.ViewModels
 
             var photo = await PhotoService.TaskPhotoAsync();
             ImageProcessingService.Open(photo);
-            var emotions = await EmotionService.GetEmotions(photo);
+            var detections = await DetectionService.DetectAsync(photo);
 
-            foreach(var e in emotions)
+            foreach(var d in detections)
             {
-                ImageProcessingService.DrawDebugRect(e.FaceRectangle.Left, e.FaceRectangle.Top, e.FaceRectangle.Width, e.FaceRectangle.Height, "#c0392b");
+                ImageProcessingService.DrawDebugRect(d.Rectangle);
             }
 
             Photo = ImageProcessingService.GetImage();

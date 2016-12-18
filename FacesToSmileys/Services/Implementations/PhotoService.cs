@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
-    public class PhotoService
+    public class PhotoService : IPhotoService
     {
         public async Task<byte[]> TaskPhotoAsync()
         {
