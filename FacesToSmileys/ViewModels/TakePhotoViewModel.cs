@@ -13,6 +13,7 @@ namespace FacesToSmileys.ViewModels
         IPhotoService PhotoService { get; }
         IDetectionService DetectionService { get; }
         IImageProcessingService ImageProcessingService { get; }
+        IFileService FileService { get; }
 
         byte[] _photo;
 
@@ -24,11 +25,15 @@ namespace FacesToSmileys.ViewModels
 
         public ICommand TakePhotoCommand { get; private set; }
 
-        public TakePhotoViewModel(IPhotoService photoService, IImageProcessingService imageProcessiongService, IDetectionService detectionService)
+        public TakePhotoViewModel(IPhotoService photoService, 
+                                  IImageProcessingService imageProcessiongService, 
+                                  IDetectionService detectionService,
+                                  IFileService fileService)
         {
             PhotoService = photoService;
             ImageProcessingService = imageProcessiongService;
             DetectionService = detectionService;
+            FileService = fileService;
             TakePhotoCommand = new Command(async () => await TakePhoto());
         }
 
@@ -43,6 +48,7 @@ namespace FacesToSmileys.ViewModels
             foreach(var d in detections)
             {
                 ImageProcessingService.DrawDebugRect(d.Rectangle);
+                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
             }
 
             Photo = ImageProcessingService.GetImage();

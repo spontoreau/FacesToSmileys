@@ -58,6 +58,21 @@ namespace FacesToSmileys.Services.Implementations
             Surface.Canvas.DrawLine(start.X, start.Y, end.X, end.Y, Paint);
         }
 
+        public void DrawImage(byte[] image, Rectangle bounds)
+        {
+            using (var data = new SKData(image))
+            {
+                using (var skImage = SKImage.FromData(new SKData(image)))
+                {
+                    var xScale = bounds.Width / skImage.Width;
+                    var yScale = bounds.Heigth / skImage.Height;
+                    Surface.Canvas.SetMatrix(SKMatrix.MakeScale(xScale, yScale));
+                    Surface.Canvas.DrawImage(skImage, bounds.X / xScale, bounds.Y / yScale);//We want to scale width & height, not X & Y
+                    Surface.Canvas.ResetMatrix();
+                }
+            }
+        }
+
         public byte[] GetImage()
         {
             if (!IsOpen)

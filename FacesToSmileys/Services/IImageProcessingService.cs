@@ -8,6 +8,7 @@ namespace FacesToSmileys.Services
         void Open(byte[] image);
         void DrawDebugRect(Rectangle rectangle);
         void DrawDebugLine(Point start, Point end);
+        void DrawImage(byte[] image, Rectangle bounds);
         byte[] GetImage();
         void Close();
     }

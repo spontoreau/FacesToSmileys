@@ -2,6 +2,7 @@
 using FacesToSmileys.ViewModels;
 using Xamarin.Forms;
 using FacesToSmileys.Services.Implementations;
+using FacesToSmileys.Services;
 
 namespace FacesToSmileys
 {
@@ -14,10 +15,10 @@ namespace FacesToSmileys
             var photoService = new PhotoService();
             var imageProcessingService = new ImageProcessingService();
             var detectionService = new DetectionService("");//set your api access key here
-
+            var fileService = new FileService();
             MainPage = new TakePhotoPage
-            {   
-                BindingContext = new TakePhotoViewModel(photoService, imageProcessingService, detectionService)
+            {
+                BindingContext = new TakePhotoViewModel(photoService, imageProcessingService, detectionService, fileService)
             };
         }
 

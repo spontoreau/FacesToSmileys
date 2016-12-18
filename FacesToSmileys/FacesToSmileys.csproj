@@ -35,6 +35,30 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>TakePhotoPage.xaml</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\angry.png">
+      <LogicalName>angry.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\contempt.png">
+      <LogicalName>contempt.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\disgust.png">
+      <LogicalName>disgust.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\fear.png">
+      <LogicalName>fear.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\happiness.png">
+      <LogicalName>happiness.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\neutral.png">
+      <LogicalName>neutral.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\sadness.png">
+      <LogicalName>sadness.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\surprise.png">
+      <LogicalName>surprise.png</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -57,6 +81,8 @@
     <Compile Include="Models\Attitude.cs" />
     <Compile Include="Models\Detection.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Services\IFileService.cs" />
+    <Compile Include="Services\Implementations\FileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -106,6 +132,7 @@
     <Folder Include="Converters\" />
     <Folder Include="Services\Implementations\" />
     <Folder Include="Models\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

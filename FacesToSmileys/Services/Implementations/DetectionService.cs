@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -25,9 +26,14 @@ namespace FacesToSmileys.Services.Implementations
             {
                 var emotions = await emotionServiceClient.RecognizeAsync(stream);
                 return emotions
-                    .Select(x => new Detection(Attitude.Anger, new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
+                    .Select(x => new Detection(GetAttitude(x.Scores.ToRankedList().First().Key), new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
                     .ToList();
             }
+        }
+
+        public Attitude GetAttitude(string bestScore)
+        {
+            return (Attitude)Enum.Parse(typeof(Attitude), bestScore);
         }
     }
 }
