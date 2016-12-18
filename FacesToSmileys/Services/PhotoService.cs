@@ -1,8 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using Xamarin.Forms;
 
 namespace FacesToSmileys.Services
 {
@@ -11,12 +11,12 @@ namespace FacesToSmileys.Services
         public string Folder { get; set; } = "Picture";
         public string Extension { get; set; } = "png";
 
-        public async Task<string> TaskPhotoAsync()
+        public async Task<Stream> TaskPhotoAsync()
         {
             await CrossMedia.Current.Initialize();
 
             if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                return string.Empty;
+                throw new InvalidOperationException("No camera available");
 
             var mediaOptions = new StoreCameraMediaOptions
             {
@@ -26,7 +26,7 @@ namespace FacesToSmileys.Services
 
             using (var file = await CrossMedia.Current.TakePhotoAsync(mediaOptions))
             {
-                return file?.Path;
+                return file?.GetStream();
             }
         }
     }

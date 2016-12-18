@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage    xmlns="http://xamarin.com/schemas/2014/forms" 
+		        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		        xmlns:converter="clr-namespace:FacesToSmileys.Converters;assembly=FacesToSmileys"
+		        x:Class="FacesToSmileys.Pages.TakePhotoPage">
+	<ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BytesToImageSourceConverter x:Key="BytesToImageSourceConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+          <OnPlatform.iOS>
+            0, 20, 0, 0
+          </OnPlatform.iOS>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <StackLayout>
+        <Button Text="Take a picture" Command="{Binding TakePhotoCommand}"/>
+        <Image HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="{Binding Photo, Converter={StaticResource BytesToImageSourceConverter}}" />
+        <ActivityIndicator  IsRunning="{Binding IsBusy}" HorizontalOptions="Center" />
+	</StackLayout>
+</ContentPage>

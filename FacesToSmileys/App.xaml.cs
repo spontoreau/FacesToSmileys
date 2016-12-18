@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using FacesToSmileys.Pages;
+using FacesToSmileys.ViewModels;
+using Xamarin.Forms;
 
 namespace FacesToSmileys
 {
@@ -8,7 +10,10 @@ namespace FacesToSmileys
         {
             InitializeComponent();
 
-            MainPage = new FacesToSmileysPage();
+            MainPage = new TakePhotoPage
+            {
+                BindingContext = new TakePhotoViewModel()
+            };
         }
 
         protected override void OnStart()
