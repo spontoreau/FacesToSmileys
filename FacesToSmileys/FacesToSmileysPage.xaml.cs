@@ -17,7 +17,15 @@ namespace FacesToSmileys
         {
             var photoService = new PhotoService();
             var file = await photoService.TaskPhotoAsync();
-            image.Source = ImageSource.FromFile(file);
+
+            if(string.IsNullOrEmpty(file))
+            {
+                image.Source = ImageSource.FromFile(file);
+            }
+            else
+            {
+                await DisplayAlert("No camera", "No camera available", "Ok"); 
+            }
         }
     }
 }
