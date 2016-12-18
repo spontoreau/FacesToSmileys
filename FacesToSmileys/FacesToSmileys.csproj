@@ -49,6 +49,7 @@
     </Compile>
     <Compile Include="ViewModels\ViewModel.cs" />
     <Compile Include="Converters\BytesToImageSourceConverter.cs" />
+    <Compile Include="Services\ImageProcessingService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">
@@ -83,6 +84,9 @@
     </Reference>
     <Reference Include="Microsoft.ProjectOxford.Emotion">
       <HintPath>..\packages\Microsoft.ProjectOxford.Emotion.1.0.331.1\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Microsoft.ProjectOxford.Emotion.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.55.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

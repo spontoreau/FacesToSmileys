@@ -14,10 +14,14 @@ namespace FacesToSmileys.Services
             ServiceKey = serviceKey;
         }
 
-        public async Task<Emotion[]> GetEmotions(Stream stream)
+        public async Task<Emotion[]> GetEmotions(byte[] image)
         {
             var emotionServiceClient = new EmotionServiceClient(ServiceKey);
-            return await emotionServiceClient.RecognizeAsync(stream);
+
+            using(var stream = new MemoryStream(image))
+            {
+                return await emotionServiceClient.RecognizeAsync(stream);
+            }
         }
     }
 }

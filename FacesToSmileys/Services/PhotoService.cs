@@ -8,10 +8,7 @@ namespace FacesToSmileys.Services
 {
     public class PhotoService
     {
-        public string Folder { get; set; } = "Picture";
-        public string Extension { get; set; } = "png";
-
-        public async Task<Stream> TaskPhotoAsync()
+        public async Task<byte[]> TaskPhotoAsync()
         {
             await CrossMedia.Current.Initialize();
 
@@ -20,13 +17,17 @@ namespace FacesToSmileys.Services
 
             var mediaOptions = new StoreCameraMediaOptions
             {
-                Directory = Folder,
-                Name = $"{Guid.NewGuid()}.{Extension}"
+                Directory = "Picture",
+                Name = $"{Guid.NewGuid()}.bmp"
             };
 
             using (var file = await CrossMedia.Current.TakePhotoAsync(mediaOptions))
             {
-                return file?.GetStream();
+                using(var ms = new MemoryStream())
+                {
+                    file?.GetStream()?.CopyTo(ms);
+                    return ms.ToArray();
+                }
             }
         }
     }
