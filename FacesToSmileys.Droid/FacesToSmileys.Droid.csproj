@@ -121,6 +121,14 @@
     <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+    <AndroidResource Include="Resources\drawable\angry.png" />
+    <AndroidResource Include="Resources\drawable\contempt.png" />
+    <AndroidResource Include="Resources\drawable\disgust.png" />
+    <AndroidResource Include="Resources\drawable\fear.png" />
+    <AndroidResource Include="Resources\drawable\happiness.png" />
+    <AndroidResource Include="Resources\drawable\neutral.png" />
+    <AndroidResource Include="Resources\drawable\sadness.png" />
+    <AndroidResource Include="Resources\drawable\surprise.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FacesToSmileys\FacesToSmileys.csproj">

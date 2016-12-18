@@ -139,6 +139,16 @@
       <Name>FacesToSmileys</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\angry.png" />
+    <BundleResource Include="Resources\contempt.png" />
+    <BundleResource Include="Resources\disgust.png" />
+    <BundleResource Include="Resources\fear.png" />
+    <BundleResource Include="Resources\happiness.png" />
+    <BundleResource Include="Resources\neutral.png" />
+    <BundleResource Include="Resources\sadness.png" />
+    <BundleResource Include="Resources\surprise.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
 </Project>
