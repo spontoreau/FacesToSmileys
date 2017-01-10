@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using SkiaSharp;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
 
 namespace FacesToSmileys.ViewModels
 {
@@ -42,11 +44,17 @@ namespace FacesToSmileys.ViewModels
             IsBusy = true;
 
             var photo = await PhotoService.TaskPhotoAsync();
+            // Track Camera usage
+            Analytics.TrackEvent("Photo taken");
+
             ImageProcessingService.Open(photo);
             var detections = await DetectionService.DetectAsync(photo);
 
             foreach(var d in detections)
             {
+                // Track each detection
+                Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
+
                 ImageProcessingService.DrawDebugRect(d.Rectangle);
                 ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
             }
