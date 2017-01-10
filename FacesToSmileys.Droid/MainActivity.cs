@@ -7,6 +7,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+// Visual Studio Mobile Center
+using Microsoft.Azure.Mobile;
 
 namespace FacesToSmileys.Droid
 {
@@ -15,6 +17,9 @@ namespace FacesToSmileys.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
+            // Enable Visual Studio Mobile Center Analytics and Crashes collection
+            MobileCenter.Configure("452cd3ed-46e7-49d7-97f0-20752798b535");
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
