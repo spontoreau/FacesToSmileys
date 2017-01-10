@@ -4,6 +4,8 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+// Visual Studio Mobile Center Analytics and Crashes
+using Microsoft.Azure.Mobile;
 
 namespace FacesToSmileys.iOS
 {
@@ -19,6 +21,8 @@ namespace FacesToSmileys.iOS
             Xamarin.Calabash.Start();
 #endif
 
+            // Enable Visual Studio Mobile Center Analytics and Crashes collection
+            MobileCenter.Configure("b51afa61-8020-4237-974f-6f9d4b92731c");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
