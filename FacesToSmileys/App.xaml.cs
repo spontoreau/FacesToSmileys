@@ -3,6 +3,10 @@ using FacesToSmileys.ViewModels;
 using Xamarin.Forms;
 using FacesToSmileys.Services.Implementations;
 using FacesToSmileys.Services;
+// Visual Studio Mobile Center Analytics and Crashes
+using Microsoft.Azure.Mobile;
+using Microsoft.Azure.Mobile.Analytics;
+using Microsoft.Azure.Mobile.Crashes;
 
 namespace FacesToSmileys
 {
@@ -11,6 +15,9 @@ namespace FacesToSmileys
         public App()
         {
             InitializeComponent();
+
+            // Enable Visual Studio Mobile Center Analytics and Crashes collection
+            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 
             var photoService = new PhotoService();
             var imageProcessingService = new ImageProcessingService();
