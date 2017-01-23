@@ -26,12 +26,11 @@ namespace FacesToSmileys.UITests
         }
 
         [Test]
-        public void WelcomeTextIsDisplayed()
+        public void TakeAPictureButton_IsDisplayed()
         {
-            AppResult[] results = app.WaitForElement(c => c.Marked("Welcome to Xamarin Forms!"));
-            app.Screenshot("Welcome screen.");
-
+            AppResult[] results = app.WaitForElement(c => c.Marked("Take a picture"));
             Assert.IsTrue(results.Any());
         }
+
     }
 }

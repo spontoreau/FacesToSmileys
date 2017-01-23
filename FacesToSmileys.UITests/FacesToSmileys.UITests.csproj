@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -25,22 +25,23 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <Private>True</Private>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="Xamarin.UITest">
       <HintPath>..\packages\Xamarin.UITest.2.0.3\lib\Xamarin.UITest.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\iOS\FacesToSmileys.iOS.csproj">
+    <ProjectReference Include="..\FacesToSmileys.iOS\FacesToSmileys.iOS.csproj">
       <Project>{ED91FBA1-5FEF-48CF-AB7C-4BD517D28155}</Project>
       <Name>FacesToSmileys.iOS</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Droid\FacesToSmileys.Droid.csproj">
+    <ProjectReference Include="..\FacesToSmileys.Droid\FacesToSmileys.Droid.csproj">
       <Project>{05F5BDBD-0763-4E65-9016-64DB9F3617C8}</Project>
       <Name>FacesToSmileys.Droid</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
@@ -53,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
