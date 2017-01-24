@@ -47,22 +47,35 @@ namespace FacesToSmileys.ViewModels
             // Track Camera usage
             Analytics.TrackEvent("Photo taken");
 
-            ImageProcessingService.Open(photo);
-            var detections = await DetectionService.DetectAsync(photo);
-
-            foreach(var d in detections)
+            if (photo == null)
             {
-                // Track each detection
-                Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
-
-                ImageProcessingService.DrawDebugRect(d.Rectangle);
-                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
+                TakeActionForAPhoto(photo);
             }
+            else
+            {
+                ImageProcessingService.Open(photo);
+                var detections = await DetectionService.DetectAsync(photo);
 
-            Photo = ImageProcessingService.GetImage();
-            ImageProcessingService.Close();
+                foreach (var d in detections)
+                {
+                    // Track each detection
+                    Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
 
-            IsBusy = false;
+                    ImageProcessingService.DrawDebugRect(d.Rectangle);
+                    ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
+                }
+
+                Photo = ImageProcessingService.GetImage();
+                ImageProcessingService.Close();
+
+                IsBusy = false;
+            }
+        }
+
+        private void TakeActionForAPhoto(byte[] photo)
+        {
+            // First look at the size of the photo
+            var size = photo.Length;
         }
     }
 }
