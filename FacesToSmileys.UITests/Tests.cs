@@ -8,7 +8,7 @@ using Xamarin.UITest.Queries;
 namespace FacesToSmileys.UITests
 {
     [TestFixture(Platform.Android)]
-    [TestFixture(Platform.iOS)]
+    //[TestFixture(Platform.iOS)]
     public class Tests
     {
         IApp app;
