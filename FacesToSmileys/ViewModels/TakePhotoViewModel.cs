@@ -75,7 +75,7 @@ namespace FacesToSmileys.ViewModels
         private void TakeActionForAPhoto(byte[] photo)
         {
             // First look at the size of the photo
-            var size = photo.Length()
+            var size = photo.Length;
         }
     }
 }
