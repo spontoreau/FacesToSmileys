@@ -26,10 +26,27 @@ namespace FacesToSmileys.UITests
         }
 
         [Test]
-        public void TakeAPictureButton_IsDisplayed()
+        public void TakeAPictureButton_Portait_IsDisplayed()
         {
             AppResult[] results = app.WaitForElement(c => c.Marked("Take a picture"));
             Assert.IsTrue(results.Any());
+            app.Screenshot("Take a picture button in portrait mode");
+        }
+
+        [Test]
+        public void TakeAPictureButton_Landscape_IsDisplayed()
+        {
+            app.SetOrientationLandscape();
+            AppResult[] results = app.WaitForElement(c => c.Marked("Take a picture"));
+            Assert.IsTrue(results.Any());
+            app.Screenshot("Take a picture button in landscape mode");
+        }
+
+        [Test]
+        public void Camera_IsDiplayed()
+        {
+            app.Tap(c => c.Marked("Take a picture"));
+            app.Screenshot("Camera");
         }
 
     }
