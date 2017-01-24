@@ -49,5 +49,18 @@ namespace FacesToSmileys.UITests
             app.Screenshot("Camera");
         }
 
+        [Test]
+        public void Camera_TapToTakeAPicture()
+        {
+            app.Tap(c => c.Marked("Take a picture"));
+            app.TapCoordinates(300, 1195);
+            AppResult[] results = app.WaitForElement(c => c.Marked("Take a picture"));
+            Assert.IsTrue(results.Any());
+            app.Screenshot("Displaying analyzed picture");
+
+        }
+
+
+
     }
 }
