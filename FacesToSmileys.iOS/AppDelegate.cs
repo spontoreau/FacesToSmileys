@@ -22,7 +22,7 @@ namespace FacesToSmileys.iOS
 #endif
 
             // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Configure("b51afa61-8020-4237-974f-6f9d4b92731c");
+            MobileCenter.Configure("");
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

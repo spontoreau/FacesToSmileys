@@ -12,13 +12,13 @@ using Microsoft.Azure.Mobile;
 
 namespace FacesToSmileys.Droid
 {
-    [Activity(ScreenOrientation = ScreenOrientation.Landscape, Label = "FacesToSmileys.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(ScreenOrientation = ScreenOrientation.Landscape, MainLauncher = false, Label = "FacesToSmileys.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
         {
             // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Configure("452cd3ed-46e7-49d7-97f0-20752798b535");
+            MobileCenter.Configure("");
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;

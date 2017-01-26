@@ -2,7 +2,8 @@
 <ContentPage    xmlns="http://xamarin.com/schemas/2014/forms" 
 		        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 		        xmlns:converter="clr-namespace:FacesToSmileys.Converters;assembly=FacesToSmileys"
-		        x:Class="FacesToSmileys.Pages.TakePhotoPage">
+		        x:Class="FacesToSmileys.Pages.TakePhotoPage"
+		        BackgroundColor="#515151">
 	<ContentPage.Resources>
         <ResourceDictionary>
             <converter:BytesToImageSourceConverter x:Key="BytesToImageSourceConverter"/>
@@ -15,9 +16,37 @@
           </OnPlatform.iOS>
         </OnPlatform>
     </ContentPage.Padding>
-    <StackLayout>
-        <Button Text="Take a picture" Command="{Binding TakePhotoCommand}"/>
-        <Image HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="{Binding Photo, Converter={StaticResource BytesToImageSourceConverter}}" />
-        <ActivityIndicator  IsRunning="{Binding IsBusy}" HorizontalOptions="Center" />
-	</StackLayout>
+	<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+		<Image 
+			Grid.Row="0" 
+			HorizontalOptions="FillAndExpand" 
+			VerticalOptions="FillAndExpand" 
+			Source="{Binding Photo, Converter={StaticResource BytesToImageSourceConverter}}" />
+        <ActivityIndicator 
+			Grid.Row="0"  
+			IsRunning="{Binding IsBusy}" 
+			HorizontalOptions="Center" 
+			VerticalOptions="Center" />
+		<Image 
+		    Grid.Row="0" 
+			HorizontalOptions="End" 
+			VerticalOptions="End" 
+			HeightRequest="50" 
+			WidthRequest="50"
+			Source="photo.png"
+			Margin="0,0,15,5" />
+		<Button
+            Grid.Row="0"
+			BorderColor="Transparent"
+            BackgroundColor="Transparent"
+            Command="{Binding TakePhotoCommand}" 
+            HorizontalOptions="End" 
+            VerticalOptions="End" 
+            HeightRequest="50"
+            WidthRequest="50" 
+            Margin="0,0,15,5"/>
+    </Grid>
 </ContentPage>
