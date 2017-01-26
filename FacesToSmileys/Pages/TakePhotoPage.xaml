@@ -9,13 +9,6 @@
             <converter:BytesToImageSourceConverter x:Key="BytesToImageSourceConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-          <OnPlatform.iOS>
-            0, 20, 0, 0
-          </OnPlatform.iOS>
-        </OnPlatform>
-    </ContentPage.Padding>
 	<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

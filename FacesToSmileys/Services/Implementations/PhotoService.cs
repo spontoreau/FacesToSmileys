@@ -18,7 +18,8 @@ namespace FacesToSmileys.Services.Implementations
             var mediaOptions = new StoreCameraMediaOptions
             {
                 Directory = "Picture",
-                Name = $"{Guid.NewGuid()}.bmp"
+                Name = $"{Guid.NewGuid()}.bmp",
+                PhotoSize = PhotoSize.Medium
             };
 
             using (var file = await CrossMedia.Current.TakePhotoAsync(mediaOptions))

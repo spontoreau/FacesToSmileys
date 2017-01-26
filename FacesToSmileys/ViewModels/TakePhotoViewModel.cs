@@ -36,7 +36,10 @@ namespace FacesToSmileys.ViewModels
             ImageProcessingService = imageProcessiongService;
             DetectionService = detectionService;
             FileService = fileService;
-            TakePhotoCommand = new Command(async () => await TakePhoto());
+            TakePhotoCommand = new Command(async () => {
+                Photo = new byte[0];
+                await TakePhoto();
+            });
         }
 
         public async Task TakePhoto()
@@ -61,7 +64,7 @@ namespace FacesToSmileys.ViewModels
                     // Track each detection
                     Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
 
-                    ImageProcessingService.DrawDebugRect(d.Rectangle);
+                    //ImageProcessingService.DrawDebugRect(d.Rectangle);
                     ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
                 }
 
