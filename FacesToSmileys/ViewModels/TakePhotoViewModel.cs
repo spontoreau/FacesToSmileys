@@ -64,7 +64,9 @@ namespace FacesToSmileys.ViewModels
                     // Track each detection
                     Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
 
-                    //ImageProcessingService.DrawDebugRect(d.Rectangle);
+                    #if DEBUG
+                    ImageProcessingService.DrawDebugRect(d.Rectangle);
+                    #endif
                     ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
                 }
 
