@@ -1,10 +1,8 @@
-﻿using System;
-using FacesToSmileys.Services;
-using Microsoft.Azure.Mobile;
+﻿using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 
-namespace FacesToSmileys.Implementations
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Analytic sercice.

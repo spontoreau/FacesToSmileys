@@ -16,6 +16,7 @@ namespace FacesToSmileys.Dependencies
             builder.RegisterType<FileService>().As<IFileService>();
             builder.RegisterType<ImageProcessingService>().As<IImageProcessingService>();
             builder.RegisterType<PhotoService>().As<IPhotoService>();
+            builder.RegisterType<AnalyticSercice>().As<IAnalyticService>();
         }
     }
 }
