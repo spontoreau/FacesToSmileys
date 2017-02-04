@@ -52,8 +52,19 @@ namespace FacesToSmileys.ViewModels
         /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
         public bool IsBusy => _isBusy.Value;
 
+        /// <summary>
+        /// Gets the take photo command.
+        /// </summary>
+        /// <value>The take photo command.</value>
         public ICommand TakePhotoCommand { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> class.
+        /// </summary>
+        /// <param name="photoService">Photo service.</param>
+        /// <param name="imageProcessiongService">Image processiong service.</param>
+        /// <param name="detectionService">Detection service.</param>
+        /// <param name="fileService">File service.</param>
         public TakePhotoViewModel(IPhotoService photoService,
                                   IImageProcessingService imageProcessiongService,
                                   IDetectionService detectionService,
@@ -67,6 +78,9 @@ namespace FacesToSmileys.ViewModels
             Initialize();
         }
 
+        /// <summary>
+        /// Initialize this instance.
+        /// </summary>
         void Initialize()
         {
             var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
@@ -77,6 +91,10 @@ namespace FacesToSmileys.ViewModels
             TakePhotoCommand = command;
         }
 
+        /// <summary>
+        /// Takes the photo.
+        /// </summary>
+        /// <returns>The photo.</returns>
         public async Task<byte[]> TakePhoto()
         {
             var photo = await PhotoService.TaskPhotoAsync();
