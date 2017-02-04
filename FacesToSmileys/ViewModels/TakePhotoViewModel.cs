@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using FacesToSmileys.Services;
-using Microsoft.Azure.Mobile.Analytics;
 using ReactiveUI;
 
 namespace FacesToSmileys.ViewModels
@@ -29,6 +28,12 @@ namespace FacesToSmileys.ViewModels
         /// </summary>
         /// <value>The image processing service.</value>
         IImageProcessingService ImageProcessingService { get; }
+
+        /// <summary>
+        /// Gets the analytic service.
+        /// </summary>
+        /// <value>The analytic service.</value>
+        IAnalyticService AnalyticService { get; }
 
         /// <summary>
         /// Gets the file service.
@@ -68,12 +73,14 @@ namespace FacesToSmileys.ViewModels
         public TakePhotoViewModel(IPhotoService photoService,
                                   IImageProcessingService imageProcessiongService,
                                   IDetectionService detectionService,
-                                  IFileService fileService)
+                                  IFileService fileService,
+                                  IAnalyticService analyticService)
         {
             PhotoService = photoService;
             ImageProcessingService = imageProcessiongService;
             DetectionService = detectionService;
             FileService = fileService;
+            AnalyticService = analyticService;
 
             Initialize();
         }
@@ -99,7 +106,7 @@ namespace FacesToSmileys.ViewModels
         {
             var photo = await PhotoService.TaskPhotoAsync();
             // Track Camera usage
-            Analytics.TrackEvent("Photo taken");
+            AnalyticService.Track("Photo taken");
 
             ImageProcessingService.Open(photo);
             var detections = await DetectionService.DetectAsync(photo);
@@ -107,7 +114,7 @@ namespace FacesToSmileys.ViewModels
             foreach (var d in detections)
             {
                 // Track each detection
-                Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
+                AnalyticService.Track($"Detection done:{d.Attitude.ToString().ToLower()}");
 
 #if DEBUG
                 ImageProcessingService.DrawDebugRect(d.Rectangle);
