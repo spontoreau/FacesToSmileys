@@ -13,9 +13,10 @@ namespace FacesToSmileys.Services.Implementations
     {
         public string ServiceKey { get; }
 
-        public DetectionService(string serviceKey)
+        public DetectionService()
         {
-            ServiceKey = serviceKey;
+            //TODO will be remove soon
+            ServiceKey = "9c8888a63d284e948a82ffe188dde6e4";
         }
 
         public async Task<IList<Detection>> DetectAsync(byte[] image)
