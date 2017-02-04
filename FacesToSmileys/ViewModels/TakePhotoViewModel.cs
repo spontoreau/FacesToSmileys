@@ -1,34 +1,69 @@
-﻿using System.Windows.Input;
-using System.IO;
+﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using FacesToSmileys.Services;
-using Xamarin.Forms;
-using SkiaSharp;
-using System;
-using System.Threading.Tasks;
-using Microsoft.Azure.Mobile;
 using Microsoft.Azure.Mobile.Analytics;
+using ReactiveUI;
+using Xamarin.Forms;
 
 namespace FacesToSmileys.ViewModels
 {
-    public class TakePhotoViewModel : ViewModel
+    /// <summary>
+    /// Take photo ViewModel.
+    /// </summary>
+    public class TakePhotoViewModel : ReactiveObject
     {
+        /// <summary>
+        /// Gets the photo service.
+        /// </summary>
+        /// <value>The photo service.</value>
         IPhotoService PhotoService { get; }
+
+        /// <summary>
+        /// Gets the detection service.
+        /// </summary>
+        /// <value>The detection service.</value>
         IDetectionService DetectionService { get; }
+
+        /// <summary>
+        /// Gets the image processing service.
+        /// </summary>
+        /// <value>The image processing service.</value>
         IImageProcessingService ImageProcessingService { get; }
+
+        /// <summary>
+        /// Gets the file service.
+        /// </summary>
+        /// <value>The file service.</value>
         IFileService FileService { get; }
 
         byte[] _photo;
 
+        /// <summary>
+        /// Gets or sets the photo.
+        /// </summary>
+        /// <value>The photo.</value>
         public byte[] Photo
         {
             get { return _photo; }
-            set { Set(nameof(Photo), ref _photo, value); }
+            set { this.RaiseAndSetIfChanged(ref _photo, value); }
+        }
+
+        bool _isBusy;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> is busy.
+        /// </summary>
+        /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set { this.RaiseAndSetIfChanged(ref _isBusy, value); }
         }
 
         public ICommand TakePhotoCommand { get; private set; }
 
-        public TakePhotoViewModel(IPhotoService photoService, 
-                                  IImageProcessingService imageProcessiongService, 
+        public TakePhotoViewModel(IPhotoService photoService,
+                                  IImageProcessingService imageProcessiongService,
                                   IDetectionService detectionService,
                                   IFileService fileService)
         {
@@ -36,14 +71,13 @@ namespace FacesToSmileys.ViewModels
             ImageProcessingService = imageProcessiongService;
             DetectionService = detectionService;
             FileService = fileService;
-            TakePhotoCommand = new Command(async () => {
-                Photo = new byte[0];
-                await TakePhoto();
-            });
+
+            TakePhotoCommand = ReactiveCommand.CreateFromTask(() => TakePhoto());
         }
 
         public async Task TakePhoto()
         {
+            Photo = new byte[0];
             IsBusy = true;
 
             var photo = await PhotoService.TaskPhotoAsync();
@@ -64,9 +98,9 @@ namespace FacesToSmileys.ViewModels
                     // Track each detection
                     Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
 
-                    #if DEBUG
+#if DEBUG
                     ImageProcessingService.DrawDebugRect(d.Rectangle);
-                    #endif
+#endif
                     ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
                 }
 
