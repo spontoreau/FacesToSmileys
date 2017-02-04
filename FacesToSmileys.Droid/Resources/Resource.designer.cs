@@ -27,6 +27,7 @@ namespace FacesToSmileys.Droid
 		public static void UpdateIdValues()
 		{
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::FacesToSmileys.Droid.Resource.Attribute.actionBarSize;
+			global::Splat.Resource.String.library_name = global::FacesToSmileys.Droid.Resource.String.library_name;
 		}
 		
 		public partial class Animation
@@ -3008,6 +3009,9 @@ namespace FacesToSmileys.Droid
 			
 			// aapt resource value: 0x7f070011
 			public const int character_counter_pattern = 2131165201;
+			
+			// aapt resource value: 0x7f070026
+			public const int library_name = 2131165222;
 			
 			// aapt resource value: 0x7f070000
 			public const int mr_button_content_description = 2131165184;

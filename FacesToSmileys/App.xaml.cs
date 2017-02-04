@@ -21,7 +21,7 @@ namespace FacesToSmileys
 
             var photoService = new PhotoService();
             var imageProcessingService = new ImageProcessingService();
-            var detectionService = new DetectionService("");//set your api access key here
+            var detectionService = new DetectionService("9c8888a63d284e948a82ffe188dde6e4");//set your api access key here
             var fileService = new FileService();
             MainPage = new TakePhotoPage
             {

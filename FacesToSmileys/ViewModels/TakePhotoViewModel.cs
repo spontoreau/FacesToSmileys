@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reactive;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using FacesToSmileys.Services;
 using Microsoft.Azure.Mobile.Analytics;
 using ReactiveUI;
-using Xamarin.Forms;
 
 namespace FacesToSmileys.ViewModels
 {
@@ -36,17 +36,13 @@ namespace FacesToSmileys.ViewModels
         /// <value>The file service.</value>
         IFileService FileService { get; }
 
-        byte[] _photo;
+        ObservableAsPropertyHelper<byte[]> _photo;
 
         /// <summary>
         /// Gets or sets the photo.
         /// </summary>
         /// <value>The photo.</value>
-        public byte[] Photo
-        {
-            get { return _photo; }
-            set { this.RaiseAndSetIfChanged(ref _photo, value); }
-        }
+        public byte[] Photo => _photo.Value;
 
         bool _isBusy;
 
@@ -72,49 +68,39 @@ namespace FacesToSmileys.ViewModels
             DetectionService = detectionService;
             FileService = fileService;
 
-            TakePhotoCommand = ReactiveCommand.CreateFromTask(() => TakePhoto());
+            var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
+            _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
+
+            TakePhotoCommand = command;
         }
 
-        public async Task TakePhoto()
+        public async Task<byte[]> TakePhoto()
         {
-            Photo = new byte[0];
             IsBusy = true;
 
             var photo = await PhotoService.TaskPhotoAsync();
             // Track Camera usage
             Analytics.TrackEvent("Photo taken");
 
-            if (photo == null)
-            {
-                TakeActionForAPhoto(photo);
-            }
-            else
-            {
-                ImageProcessingService.Open(photo);
-                var detections = await DetectionService.DetectAsync(photo);
+            ImageProcessingService.Open(photo);
+            var detections = await DetectionService.DetectAsync(photo);
 
-                foreach (var d in detections)
-                {
-                    // Track each detection
-                    Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
+            foreach (var d in detections)
+            {
+                // Track each detection
+                Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
 
 #if DEBUG
-                    ImageProcessingService.DrawDebugRect(d.Rectangle);
+                ImageProcessingService.DrawDebugRect(d.Rectangle);
 #endif
-                    ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
-                }
-
-                Photo = ImageProcessingService.GetImage();
-                ImageProcessingService.Close();
-
-                IsBusy = false;
+                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
             }
-        }
 
-        private void TakeActionForAPhoto(byte[] photo)
-        {
-            // First look at the size of the photo
-            var size = photo.Length;
+            var finalImage = ImageProcessingService.GetImage();
+            ImageProcessingService.Close();
+
+            IsBusy = false;
+            return finalImage;
         }
     }
 }
