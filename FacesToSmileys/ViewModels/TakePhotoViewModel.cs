@@ -64,6 +64,11 @@ namespace FacesToSmileys.ViewModels
             DetectionService = detectionService;
             FileService = fileService;
 
+            Initialize();
+        }
+
+        void Initialize()
+        {
             var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
 
             _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
