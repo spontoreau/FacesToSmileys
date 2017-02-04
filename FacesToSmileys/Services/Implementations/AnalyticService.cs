@@ -9,24 +9,26 @@ namespace FacesToSmileys.Services.Implementations
     /// </summary>
     public class AnalyticSercice : IAnalyticService
     {
+        IConfigurationService ConfigurationService { get; set; }
+
         /// <summary>
         /// Initializes the <see cref="T:FacesToSmileys.Implementations.AnalyticSercice"/> class.
         /// </summary>
         static AnalyticSercice()
         {
-            // Enable Visual Studio Mobile Center Analytics and Crashes collection
             MobileCenter.Start(typeof(Analytics), typeof(Crashes));
         }
 
-        public AnalyticSercice()
+        public AnalyticSercice(IConfigurationService configurationService)
         {
-            //Initialize();
+            ConfigurationService = configurationService;
+            Initialize();
         }
 
         void Initialize()
         {
-            //TODO configure with json configuration file
-            MobileCenter.Configure("");
+            var mobileCenterKey = ConfigurationService.GetSecret().MobileCenter;
+            MobileCenter.Configure(mobileCenterKey);
         }
 
         /// <summary>
