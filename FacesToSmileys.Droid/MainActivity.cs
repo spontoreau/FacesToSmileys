@@ -9,6 +9,8 @@ using Android.Widget;
 using Android.OS;
 // Visual Studio Mobile Center
 using Microsoft.Azure.Mobile;
+using FacesToSmileys.Dependencies;
+using FacesToSmileys.Services;
 
 namespace FacesToSmileys.Droid
 {
@@ -17,9 +19,6 @@ namespace FacesToSmileys.Droid
     {
         protected override void OnCreate(Bundle bundle)
         {
-            // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Configure("");
-
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -27,6 +26,7 @@ namespace FacesToSmileys.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
+            ExternalModule.Register<IConfigurationService, ConfigurationService>();
             LoadApplication(new App());
         }
     }

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
-// Visual Studio Mobile Center Analytics and Crashes
-using Microsoft.Azure.Mobile;
+using FacesToSmileys.Dependencies;
+using FacesToSmileys.Services;
 
 namespace FacesToSmileys.iOS
 {
@@ -20,9 +16,7 @@ namespace FacesToSmileys.iOS
 #if ENABLE_TEST_CLOUD
             Xamarin.Calabash.Start();
 #endif
-
-            // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Configure("");
+            ExternalModule.Register<IConfigurationService, ConfigurationService>();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

@@ -85,6 +85,9 @@
     <Compile Include="Dependencies\ViewModelModule.cs" />
     <Compile Include="Services\IAnalyticService.cs" />
     <Compile Include="Services\Implementations\AnalyticService.cs" />
+    <Compile Include="Dependencies\ExternalModule.cs" />
+    <Compile Include="Services\IConfigurationService.cs" />
+    <Compile Include="Models\Secret.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">

@@ -17,6 +17,7 @@ namespace FacesToSmileys
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterModule<ViewModelModule>();
+            containerBuilder.RegisterModule<ExternalModule>();
             Container = containerBuilder.Build();
         }
 
