@@ -1,12 +1,8 @@
-﻿using FacesToSmileys.Pages;
+﻿using Autofac;
+using FacesToSmileys.Dependencies;
+using FacesToSmileys.Pages;
 using FacesToSmileys.ViewModels;
 using Xamarin.Forms;
-// Visual Studio Mobile Center Analytics and Crashes
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
-using Microsoft.Azure.Mobile.Crashes;
-using Autofac;
-using FacesToSmileys.Dependencies;
 
 namespace FacesToSmileys
 {
@@ -17,9 +13,6 @@ namespace FacesToSmileys
         public App()
         {
             InitializeComponent();
-
-            // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
 
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ServiceModule>();
