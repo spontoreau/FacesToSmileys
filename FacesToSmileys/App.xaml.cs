@@ -18,9 +18,6 @@ namespace FacesToSmileys
         {
             InitializeComponent();
 
-            // Enable Visual Studio Mobile Center Analytics and Crashes collection
-            MobileCenter.Start(typeof(Analytics), typeof(Crashes));
-
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterModule<ViewModelModule>();

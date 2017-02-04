@@ -83,6 +83,8 @@
     <Compile Include="Services\Implementations\FileService.cs" />
     <Compile Include="Dependencies\ServiceModule.cs" />
     <Compile Include="Dependencies\ViewModelModule.cs" />
+    <Compile Include="Services\IAnalyticService.cs" />
+    <Compile Include="Services\Implementations\AnalyticService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">
