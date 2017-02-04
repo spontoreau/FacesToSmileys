@@ -44,17 +44,13 @@ namespace FacesToSmileys.ViewModels
         /// <value>The photo.</value>
         public byte[] Photo => _photo.Value;
 
-        bool _isBusy;
+        ObservableAsPropertyHelper<bool> _isBusy;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> is busy.
+        /// Gets a value indicating whether this <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> is busy.
         /// </summary>
         /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
-        public bool IsBusy
-        {
-            get { return _isBusy; }
-            set { this.RaiseAndSetIfChanged(ref _isBusy, value); }
-        }
+        public bool IsBusy => _isBusy.Value;
 
         public ICommand TakePhotoCommand { get; private set; }
 
@@ -69,15 +65,15 @@ namespace FacesToSmileys.ViewModels
             FileService = fileService;
 
             var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
+
             _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
+            _isBusy = command.IsExecuting.ToProperty(this, x => x.IsBusy, false);
 
             TakePhotoCommand = command;
         }
 
         public async Task<byte[]> TakePhoto()
         {
-            IsBusy = true;
-
             var photo = await PhotoService.TaskPhotoAsync();
             // Track Camera usage
             Analytics.TrackEvent("Photo taken");
@@ -99,7 +95,6 @@ namespace FacesToSmileys.ViewModels
             var finalImage = ImageProcessingService.GetImage();
             ImageProcessingService.Close();
 
-            IsBusy = false;
             return finalImage;
         }
     }
