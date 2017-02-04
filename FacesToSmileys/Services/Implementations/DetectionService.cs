@@ -11,16 +11,17 @@ namespace FacesToSmileys.Services.Implementations
 {
     public class DetectionService : IDetectionService
     {
-        public string ServiceKey { get; }
+        IConfigurationService ConfigurationService { get; set; }
 
-        public DetectionService(string serviceKey)
+        public DetectionService(IConfigurationService configurationService)
         {
-            ServiceKey = serviceKey;
+            ConfigurationService = configurationService;
         }
 
         public async Task<IList<Detection>> DetectAsync(byte[] image)
         {
-            var emotionServiceClient = new EmotionServiceClient(ServiceKey);
+            var cognitiveKey = ConfigurationService.GetSecret().Cognitive;
+            var emotionServiceClient = new EmotionServiceClient(cognitiveKey);
 
             using(var stream = new MemoryStream(image))
             {

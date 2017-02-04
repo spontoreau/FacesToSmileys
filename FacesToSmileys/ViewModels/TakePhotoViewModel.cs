@@ -1,86 +1,131 @@
-﻿using System.Windows.Input;
-using System.IO;
-using FacesToSmileys.Services;
-using Xamarin.Forms;
-using SkiaSharp;
-using System;
+﻿using System.Reactive;
 using System.Threading.Tasks;
-using Microsoft.Azure.Mobile;
-using Microsoft.Azure.Mobile.Analytics;
+using System.Windows.Input;
+using FacesToSmileys.Services;
+using ReactiveUI;
 
 namespace FacesToSmileys.ViewModels
 {
-    public class TakePhotoViewModel : ViewModel
+    /// <summary>
+    /// Take photo ViewModel.
+    /// </summary>
+    public class TakePhotoViewModel : ReactiveObject
     {
+        /// <summary>
+        /// Gets the photo service.
+        /// </summary>
+        /// <value>The photo service.</value>
         IPhotoService PhotoService { get; }
+
+        /// <summary>
+        /// Gets the detection service.
+        /// </summary>
+        /// <value>The detection service.</value>
         IDetectionService DetectionService { get; }
+
+        /// <summary>
+        /// Gets the image processing service.
+        /// </summary>
+        /// <value>The image processing service.</value>
         IImageProcessingService ImageProcessingService { get; }
+
+        /// <summary>
+        /// Gets the analytic service.
+        /// </summary>
+        /// <value>The analytic service.</value>
+        IAnalyticService AnalyticService { get; }
+
+        /// <summary>
+        /// Gets the file service.
+        /// </summary>
+        /// <value>The file service.</value>
         IFileService FileService { get; }
 
-        byte[] _photo;
+        ObservableAsPropertyHelper<byte[]> _photo;
 
-        public byte[] Photo
-        {
-            get { return _photo; }
-            set { Set(nameof(Photo), ref _photo, value); }
-        }
+        /// <summary>
+        /// Gets or sets the photo.
+        /// </summary>
+        /// <value>The photo.</value>
+        public byte[] Photo => _photo.Value;
 
+        ObservableAsPropertyHelper<bool> _isBusy;
+
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> is busy.
+        /// </summary>
+        /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
+        public bool IsBusy => _isBusy.Value;
+
+        /// <summary>
+        /// Gets the take photo command.
+        /// </summary>
+        /// <value>The take photo command.</value>
         public ICommand TakePhotoCommand { get; private set; }
 
-        public TakePhotoViewModel(IPhotoService photoService, 
-                                  IImageProcessingService imageProcessiongService, 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> class.
+        /// </summary>
+        /// <param name="photoService">Photo service.</param>
+        /// <param name="imageProcessiongService">Image processiong service.</param>
+        /// <param name="detectionService">Detection service.</param>
+        /// <param name="fileService">File service.</param>
+        public TakePhotoViewModel(IPhotoService photoService,
+                                  IImageProcessingService imageProcessiongService,
                                   IDetectionService detectionService,
-                                  IFileService fileService)
+                                  IFileService fileService,
+                                  IAnalyticService analyticService)
         {
             PhotoService = photoService;
             ImageProcessingService = imageProcessiongService;
             DetectionService = detectionService;
             FileService = fileService;
-            TakePhotoCommand = new Command(async () => {
-                Photo = new byte[0];
-                await TakePhoto();
-            });
+            AnalyticService = analyticService;
+
+            Initialize();
         }
 
-        public async Task TakePhoto()
+        /// <summary>
+        /// Initialize this instance.
+        /// </summary>
+        void Initialize()
         {
-            IsBusy = true;
+            var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
 
+            _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
+            _isBusy = command.IsExecuting.ToProperty(this, x => x.IsBusy, false);
+
+            TakePhotoCommand = command;
+        }
+
+        /// <summary>
+        /// Takes the photo.
+        /// </summary>
+        /// <returns>The photo.</returns>
+        public async Task<byte[]> TakePhoto()
+        {
             var photo = await PhotoService.TaskPhotoAsync();
             // Track Camera usage
-            Analytics.TrackEvent("Photo taken");
+            AnalyticService.Track("Photo taken");
 
-            if (photo == null)
+            ImageProcessingService.Open(photo);
+            var detections = await DetectionService.DetectAsync(photo);
+
+            foreach (var d in detections)
             {
-                TakeActionForAPhoto(photo);
+                // Track each detection
+                AnalyticService.Track($"Detection done:{d.Attitude.ToString().ToLower()}");
+
+#if DEBUG
+                ImageProcessingService.DrawDebugRect(d.Rectangle);
+#endif
+                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
             }
-            else
-            {
-                ImageProcessingService.Open(photo);
-                var detections = await DetectionService.DetectAsync(photo);
 
-                foreach (var d in detections)
-                {
-                    // Track each detection
-                    Analytics.TrackEvent($"Detection done:{d.Attitude.ToString().ToLower()}");
+            var finalImage = ImageProcessingService.GetImage();
+            ImageProcessingService.Close();
 
-                    #if DEBUG
-                    ImageProcessingService.DrawDebugRect(d.Rectangle);
-                    #endif
-                    ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
-                }
-
-                Photo = ImageProcessingService.GetImage();
-                ImageProcessingService.Close();
-
-                IsBusy = false;
-            }
-        }
-
-        private void TakeActionForAPhoto(byte[] photo)
-        {
-            // First look at the size of the photo
-            var size = photo.Length;
+            return finalImage;
         }
     }
 }
