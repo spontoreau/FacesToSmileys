@@ -9,6 +9,11 @@ namespace FacesToSmileys.Services
     /// </summary>
     public interface IDetectionService
     {
+        /// <summary>
+        /// Detect all face inside an image
+        /// </summary>
+        /// <param name="image">Byte array corresponding to an inmage</param>
+        /// <returns>Collection of detections</returns>
         Task<IList<Detection>> DetectAsync(byte[] image);
     }
 }
