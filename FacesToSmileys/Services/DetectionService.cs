@@ -27,7 +27,7 @@ namespace FacesToSmileys.Services
         }
 
         /// <summary>
-        /// Detect all face inside an image
+        /// Detect all faces inside an image
         /// </summary>
         /// <param name="image">Byte array corresponding to an inmage</param>
         /// <returns>Collection of detections</returns>
