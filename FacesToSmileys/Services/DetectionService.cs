@@ -27,14 +27,9 @@ namespace FacesToSmileys.Services
             {
                 var emotions = await emotionServiceClient.RecognizeAsync(stream);
                 return emotions
-                    .Select(x => new Detection(GetAttitude(x.Scores.ToRankedList().First().Key), new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
+                    .Select(x => new Detection(x.Scores.ToRankedList().First().Key, new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
                     .ToList();
             }
-        }
-
-        public Attitude GetAttitude(string bestScore)
-        {
-            return (Attitude)Enum.Parse(typeof(Attitude), bestScore);
         }
     }
 }
