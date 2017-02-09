@@ -173,9 +173,7 @@
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="Info.plist" />
@@ -188,9 +186,17 @@
     <Compile Include="ConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FacesToSmileys.Models\FacesToSmileys.Models.csproj">
+      <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
+      <Name>FacesToSmileys.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FacesToSmileys\FacesToSmileys.csproj">
       <Project>{CC8FBC3D-FDC7-4332-9415-BAF0A31A53FB}</Project>
       <Name>FacesToSmileys</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaceToSmileys.Services\FaceToSmileys.Services.csproj">
+      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
+      <Name>FaceToSmileys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

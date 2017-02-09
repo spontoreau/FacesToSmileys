@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
     public class PhotoService : IPhotoService
     {

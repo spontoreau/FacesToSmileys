@@ -3,7 +3,7 @@ using System.IO;
 using FacesToSmileys.Models;
 using SkiaSharp;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
     public class ImageProcessingService : IImageProcessingService
     {

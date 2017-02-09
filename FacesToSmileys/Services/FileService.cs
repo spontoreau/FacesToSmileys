@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
     public class FileService : IFileService
     {

@@ -7,7 +7,7 @@ using FacesToSmileys.Models;
 using Microsoft.ProjectOxford.Emotion;
 using Microsoft.ProjectOxford.Emotion.Contract;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
     public class DetectionService : IDetectionService
     {
