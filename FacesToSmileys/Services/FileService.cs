@@ -6,7 +6,7 @@ namespace FacesToSmileys.Services
 {
     public class FileService : IFileService
     {
-        public byte[] Load(string filename)
+        public byte[] LoadResource(string filename)
         {
             byte[] bytes;
             using (Stream s = GetType().GetTypeInfo().Assembly.GetManifestResourceStream(filename))

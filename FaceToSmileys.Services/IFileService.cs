@@ -1,7 +1,15 @@
 ﻿namespace FacesToSmileys.Services
 {
+    /// <summary>
+    /// Define a file service.
+    /// </summary>
     public interface IFileService
     {
-        byte[] Load(string filename);
+        /// <summary>
+        /// Load a resource
+        /// </summary>
+        /// <param name="resourceName">Resource name</param>
+        /// <returns>Byte array</returns>
+        byte[] LoadResource(string resourceName);
     }
 }

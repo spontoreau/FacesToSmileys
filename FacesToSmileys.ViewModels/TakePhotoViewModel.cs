@@ -119,7 +119,7 @@ namespace FacesToSmileys.ViewModels
 #if DEBUG
                 ImageProcessingService.DrawDebugRect(d.Rectangle);
 #endif
-                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
+                ImageProcessingService.DrawImage(FileService.LoadResource($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
             }
 
             var finalImage = ImageProcessingService.GetImage();
