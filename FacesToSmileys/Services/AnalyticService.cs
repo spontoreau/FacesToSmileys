@@ -2,15 +2,13 @@
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
     /// <summary>
     /// Analytic sercice.
     /// </summary>
     public class AnalyticSercice : IAnalyticService
     {
-        IConfigurationService ConfigurationService { get; set; }
-
         /// <summary>
         /// Initializes the <see cref="T:FacesToSmileys.Implementations.AnalyticSercice"/> class.
         /// </summary>
@@ -19,16 +17,12 @@ namespace FacesToSmileys.Services.Implementations
             MobileCenter.Start(typeof(Analytics), typeof(Crashes));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:FacesToSmileys.Services.AnalyticSercice"/> class.
+        /// </summary>
         public AnalyticSercice(IConfigurationService configurationService)
         {
-            ConfigurationService = configurationService;
-            Initialize();
-        }
-
-        void Initialize()
-        {
-            var mobileCenterKey = ConfigurationService.GetSecret().MobileCenter;
-            MobileCenter.Configure(mobileCenterKey);
+            MobileCenter.Configure(configurationService?.GetSecret()?.MobileCenter);
         }
 
         /// <summary>

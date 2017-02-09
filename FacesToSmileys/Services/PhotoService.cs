@@ -4,10 +4,17 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
+    /// <summary>
+    /// Photo service
+    /// </summary>
     public class PhotoService : IPhotoService
     {
+        /// <summary>
+        /// Take a photo
+        /// </summary>
+        /// <returns>Byte array corresponding to the phpto</returns>
         public async Task<byte[]> TaskPhotoAsync()
         {
             await CrossMedia.Current.Initialize();

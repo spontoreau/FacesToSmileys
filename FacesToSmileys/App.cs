@@ -6,14 +6,12 @@ using Xamarin.Forms;
 
 namespace FacesToSmileys
 {
-    public partial class App : Application
+    public class App : Application
     {
         IContainer Container { get; }
 
         public App()
         {
-            InitializeComponent();
-
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterModule<ViewModelModule>();

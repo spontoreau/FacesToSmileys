@@ -377,7 +377,7 @@ namespace FacesToSmileys.Droid
 			
 			// aapt resource value: 0x7f010021
 			public const int contentPadding = 2130772001;
-			
+
 			// aapt resource value: 0x7f010025
 			public const int contentPaddingBottom = 2130772005;
 			
@@ -473,7 +473,7 @@ namespace FacesToSmileys.Droid
 			
 			// aapt resource value: 0x7f010109
 			public const int expandedTitleGravity = 2130772233;
-			
+
 			// aapt resource value: 0x7f0100fe
 			public const int expandedTitleMargin = 2130772222;
 			

@@ -27,9 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml">
-      <LogicalName>App.xaml</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\TakePhotoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <LogicalName>TakePhotoPage.xaml</LogicalName>
@@ -60,34 +57,20 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="App.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\TakePhotoViewModel.cs" />
     <Compile Include="Pages\TakePhotoPage.xaml.cs">
       <DependentUpon>TakePhotoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BytesToImageSourceConverter.cs" />
-    <Compile Include="Services\IPhotoService.cs" />
-    <Compile Include="Services\Implementations\DetectionService.cs" />
-    <Compile Include="Services\Implementations\ImageProcessingService.cs" />
-    <Compile Include="Services\Implementations\PhotoService.cs" />
-    <Compile Include="Services\IDetectionService.cs" />
-    <Compile Include="Services\IImageProcessingService.cs" />
-    <Compile Include="Models\Rectangle.cs" />
-    <Compile Include="Models\Attitude.cs" />
-    <Compile Include="Models\Detection.cs" />
-    <Compile Include="Models\Point.cs" />
-    <Compile Include="Services\IFileService.cs" />
-    <Compile Include="Services\Implementations\FileService.cs" />
+    <Compile Include="Services\DetectionService.cs" />
+    <Compile Include="Services\ImageProcessingService.cs" />
+    <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="Services\FileService.cs" />
     <Compile Include="Dependencies\ServiceModule.cs" />
     <Compile Include="Dependencies\ViewModelModule.cs" />
-    <Compile Include="Services\IAnalyticService.cs" />
-    <Compile Include="Services\Implementations\AnalyticService.cs" />
+    <Compile Include="Services\AnalyticService.cs" />
     <Compile Include="Dependencies\ExternalModule.cs" />
-    <Compile Include="Services\IConfigurationService.cs" />
-    <Compile Include="Models\Secret.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -157,10 +140,21 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Dependencies\" />
+    <ProjectReference Include="..\FacesToSmileys.Models\FacesToSmileys.Models.csproj">
+      <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
+      <Name>FacesToSmileys.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FacesToSmileys.ViewModels\FacesToSmileys.ViewModels.csproj">
+      <Project>{1daf1701-5c3e-44dc-8bed-b1c1acd44516}</Project>
+      <Name>FacesToSmileys.ViewModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FaceToSmileys.Services\FaceToSmileys.Services.csproj">
+      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
+      <Name>FaceToSmileys.Services</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.175\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

@@ -1,5 +1,8 @@
 ﻿namespace FacesToSmileys.Services
 {
+    /// <summary>
+    /// Define an analytic service
+    /// </summary>
     public interface IAnalyticService
     {
         /// <summary>

@@ -3,16 +3,42 @@ using System.IO;
 using FacesToSmileys.Models;
 using SkiaSharp;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
+    /// <summary>
+    /// Image processing service
+    /// </summary>
     public class ImageProcessingService : IImageProcessingService
     {
+        /// <summary>
+        /// Opened image
+        /// </summary>
         SKImage Image { get; set; }
+
+        /// <summary>
+        /// Opened image information
+        /// </summary>
         SKImageInfo ImageInfo { get; set; }
+
+        /// <summary>
+        /// Paint object
+        /// </summary>
         SKPaint Paint { get; set; }
+
+        /// <summary>
+        /// Surface for drawing
+        /// </summary>
         SKSurface Surface { get; set; }
+
+        /// <summary>
+        /// True if image is open, otherwise false
+        /// </summary>
         bool IsOpen { get; set; }
 
+        /// <summary>
+        /// Open an image
+        /// </summary>
+        /// <param name="image">Byte array corresponding to the image</param>
         public void Open(byte[] image)
         {
             if (IsOpen)
@@ -41,6 +67,10 @@ namespace FacesToSmileys.Services.Implementations
             IsOpen = true;
         }
 
+        /// <summary>
+        /// Draw a debug rectangle on the image
+        /// </summary>
+        /// <param name="rectangle">Rectangle to draw</param>
         public void DrawDebugRect(Rectangle rectangle)
         {
             if (!IsOpen)
@@ -52,12 +82,21 @@ namespace FacesToSmileys.Services.Implementations
             DrawDebugLine(rectangle.BottomLeft, rectangle.BottomRight); //BOTTOM line
         }
 
-
+        /// <summary>
+        /// Draw a debug line on the image
+        /// </summary>
+        /// <param name="start">Start point</param>
+        /// <param name="end">End point</param>
         public void DrawDebugLine(Point start, Point end)
         {
             Surface.Canvas.DrawLine(start.X, start.Y, end.X, end.Y, Paint);
         }
 
+        /// <summary>
+        /// Draw another image on the immage
+        /// </summary>
+        /// <param name="image">Byte array corresponding to an image</param>
+        /// <param name="bounds">Drawing bounds</param>
         public void DrawImage(byte[] image, Rectangle bounds)
         {
             using (var data = new SKData(image))
@@ -65,7 +104,7 @@ namespace FacesToSmileys.Services.Implementations
                 using (var skImage = SKImage.FromData(new SKData(image)))
                 {
                     var xScale = bounds.Width / skImage.Width;
-                    var yScale = bounds.Heigth / skImage.Height;
+                    var yScale = bounds.Height / skImage.Height;
                     Surface.Canvas.SetMatrix(SKMatrix.MakeScale(xScale, yScale));
                     Surface.Canvas.DrawImage(skImage, bounds.X / xScale, bounds.Y / yScale);//We want to scale width & height, not X & Y
                     Surface.Canvas.ResetMatrix();
@@ -73,6 +112,10 @@ namespace FacesToSmileys.Services.Implementations
             }
         }
 
+        /// <summary>
+        /// Get the modify image
+        /// </summary>
+        /// <returns>Byte array corresponding to the modify image</returns>
         public byte[] GetImage()
         {
             if (!IsOpen)
@@ -91,6 +134,9 @@ namespace FacesToSmileys.Services.Implementations
             }
         }
 
+        /// <summary>
+        /// Close the current image
+        /// </summary>
         public void Close()
         {
             if (!IsOpen)
