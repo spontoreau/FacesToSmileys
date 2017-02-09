@@ -114,12 +114,12 @@ namespace FacesToSmileys.ViewModels
             foreach (var d in detections)
             {
                 // Track each detection
-                AnalyticService.Track($"Detection done:{d.Attitude.ToString().ToLower()}");
+                AnalyticService.Track($"Detection done:{d.Emotion.ToLower()}");
 
 #if DEBUG
                 ImageProcessingService.DrawDebugRect(d.Rectangle);
 #endif
-                ImageProcessingService.DrawImage(FileService.Load($"{d.Attitude.ToString().ToLower()}.png"), d.Rectangle);
+                ImageProcessingService.DrawImage(FileService.LoadResource($"{d.Emotion.ToLower()}.png"), d.Rectangle);
             }
 
             var finalImage = ImageProcessingService.GetImage();

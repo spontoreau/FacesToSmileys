@@ -5,19 +5,32 @@ using System.Linq;
 using System.Threading.Tasks;
 using FacesToSmileys.Models;
 using Microsoft.ProjectOxford.Emotion;
-using Microsoft.ProjectOxford.Emotion.Contract;
 
-namespace FacesToSmileys.Services.Implementations
+namespace FacesToSmileys.Services
 {
+    /// <summary>
+    /// Detection service
+    /// </summary>
     public class DetectionService : IDetectionService
     {
+        /// <summary>
+        /// Configuration service
+        /// </summary>
         IConfigurationService ConfigurationService { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:FacesToSmileys.Services.DetectionService"/> class.
+        /// </summary>
         public DetectionService(IConfigurationService configurationService)
         {
             ConfigurationService = configurationService;
         }
 
+        /// <summary>
+        /// Detect all faces inside an image
+        /// </summary>
+        /// <param name="image">Byte array corresponding to an inmage</param>
+        /// <returns>Collection of detections</returns>
         public async Task<IList<Detection>> DetectAsync(byte[] image)
         {
             var cognitiveKey = ConfigurationService.GetSecret().Cognitive;
@@ -27,14 +40,9 @@ namespace FacesToSmileys.Services.Implementations
             {
                 var emotions = await emotionServiceClient.RecognizeAsync(stream);
                 return emotions
-                    .Select(x => new Detection(GetAttitude(x.Scores.ToRankedList().First().Key), new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
+                    .Select(x => new Detection(x.Scores.ToRankedList().First().Key, new Rectangle(x.FaceRectangle.Left, x.FaceRectangle.Top, x.FaceRectangle.Width, x.FaceRectangle.Height)))
                     .ToList();
             }
-        }
-
-        public Attitude GetAttitude(string bestScore)
-        {
-            return (Attitude)Enum.Parse(typeof(Attitude), bestScore);
         }
     }
 }

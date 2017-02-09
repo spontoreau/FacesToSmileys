@@ -3,7 +3,7 @@
 namespace FacesToSmileys.Services
 {
     /// <summary>
-    /// Configuration service.
+    /// Define a configuration service.
     /// </summary>
     public interface IConfigurationService
     {

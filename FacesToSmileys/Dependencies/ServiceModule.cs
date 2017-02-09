@@ -1,13 +1,15 @@
 ﻿using Autofac;
 using FacesToSmileys.Services;
-using FacesToSmileys.Services.Implementations;
 
 namespace FacesToSmileys.Dependencies
 {
+    /// <summary>
+    /// Service dependencies module
+    /// </summary>
     public class ServiceModule : Module
     {
         /// <summary>
-        /// Load the module.
+        /// Load module dependencies
         /// </summary>
         /// <param name="builder">Builder.</param>
         protected override void Load(ContainerBuilder builder)
