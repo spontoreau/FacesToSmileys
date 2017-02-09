@@ -173,6 +173,9 @@
       <InProject>false</InProject>
     </ImageAsset>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
