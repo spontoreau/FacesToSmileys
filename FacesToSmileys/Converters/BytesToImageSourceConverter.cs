@@ -16,7 +16,7 @@ namespace FacesToSmileys.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var byteArray = value as byte[];
-            return  byteArray != null ? ImageSource.FromStream(() => new MemoryStream(byteArray)) : null;
+            return  byteArray != null && byteArray.Length > 0 ? ImageSource.FromStream(() => new MemoryStream(byteArray)) : null;
         }
 
         /// <summary>

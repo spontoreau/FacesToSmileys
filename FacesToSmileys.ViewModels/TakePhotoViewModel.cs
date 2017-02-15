@@ -105,6 +105,10 @@ namespace FacesToSmileys.ViewModels
         public async Task<byte[]> TakePhoto()
         {
             var photo = await PhotoService.TaskPhotoAsync();
+
+            if (photo.Length == 0)
+                return photo;
+
             // Track Camera usage
             AnalyticService.Track("Photo taken");
 
