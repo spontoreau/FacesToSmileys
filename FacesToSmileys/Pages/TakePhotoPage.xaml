@@ -38,16 +38,11 @@
 			HeightRequest="50" 
 			WidthRequest="50"
 			Source="photo.png"
-			Margin="0,0,15,5" />
-		<Button
-            Grid.Row="0"
-			BorderColor="Transparent"
-            BackgroundColor="Transparent"
-            Command="{Binding TakePhotoCommand}" 
-            HorizontalOptions="End" 
-            VerticalOptions="End" 
-            HeightRequest="50"
-            WidthRequest="50" 
-            Margin="0,0,15,5"/>
+			Margin="0,0,15,5" >
+			<Image.GestureRecognizers>
+        		<TapGestureRecognizer
+            		Command="{Binding TakePhotoCommand}"/>
+    			</Image.GestureRecognizers>
+		</Image>
     </Grid>
 </ContentPage>
