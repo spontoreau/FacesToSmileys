@@ -57,11 +57,25 @@ namespace FacesToSmileys.ViewModels
         /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
         public bool IsBusy => _isBusy.Value;
 
+		ObservableAsPropertyHelper<bool> _canShared;
+
+		/// <summary>
+		/// Gets a value indicating whether the photo can be shared.
+		/// </summary>
+		/// <value><c>true</c> if can be shared; otherwise, <c>false</c>.</value>
+		public bool CanShared => _canShared.Value;
+
         /// <summary>
         /// Gets the take photo command.
         /// </summary>
         /// <value>The take photo command.</value>
         public ICommand TakePhotoCommand { get; private set; }
+
+		/// <summary>
+		/// Gets the share photo command.
+		/// </summary>
+		/// <value>The share photo command.</value>
+		public ICommand SharePhotoCommand { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> class.
@@ -90,12 +104,14 @@ namespace FacesToSmileys.ViewModels
         /// </summary>
         void Initialize()
         {
-            var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
+            var takePhotoCommand = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
+			var sharePhotoCommand = ReactiveCommand.CreateFromTask<Unit, bool>((u) => SharePhoto());
 
-            _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
-            _isBusy = command.IsExecuting.ToProperty(this, x => x.IsBusy, false);
+            _photo = takePhotoCommand.ToProperty(this, x => x.Photo, new byte[0]);
+            _isBusy = takePhotoCommand.IsExecuting.ToProperty(this, x => x.IsBusy, false);
 
-            TakePhotoCommand = command;
+            TakePhotoCommand = takePhotoCommand;
+			SharePhotoCommand = sharePhotoCommand;
         }
 
         /// <summary>
@@ -131,5 +147,14 @@ namespace FacesToSmileys.ViewModels
 
             return finalImage;
         }
+
+		/// <summary>
+		/// Shares the photo.
+		/// </summary>
+		/// <returns>The photo.</returns>
+		public async Task<bool> SharePhoto()
+		{
+			return await Task.FromResult(true);	
+		}
     }
 }

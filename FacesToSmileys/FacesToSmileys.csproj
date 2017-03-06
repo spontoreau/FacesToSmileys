@@ -71,6 +71,7 @@
     <Compile Include="Dependencies\ViewModelModule.cs" />
     <Compile Include="Services\AnalyticService.cs" />
     <Compile Include="Dependencies\ExternalModule.cs" />
+    <Compile Include="Converters\NotEmptyArrayToBoolConverter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Autofac">

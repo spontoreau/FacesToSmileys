@@ -7,7 +7,8 @@
 	<ContentPage.Resources>
         <ResourceDictionary>
             <converter:BytesToImageSourceConverter x:Key="BytesToImageSourceConverter"/>
-        </ResourceDictionary>
+        	<converter:NotEmptyArrayToBoolConverter x:Key="NotEmptyArrayToBoolConverter"/>
+		</ResourceDictionary>
     </ContentPage.Resources>
 	<Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <Grid.RowDefinitions>
@@ -20,7 +21,8 @@
 			HeightRequest="50" 
 			WidthRequest="50"
 			Source="twitter.png"
-			Margin="15,0,0,5" />
+			Margin="15,0,0,5"
+			IsVisible="{Binding Photo, Converter={StaticResource NotEmptyArrayToBoolConverter}}"/>
 		<Image 
 			Grid.Row="0" 
 			HorizontalOptions="FillAndExpand" 
