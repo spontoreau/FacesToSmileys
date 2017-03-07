@@ -17,15 +17,19 @@ namespace FacesToSmileys
             containerBuilder.RegisterModule<ViewModelModule>();
             containerBuilder.RegisterModule<ExternalModule>();
             Container = containerBuilder.Build();
-        }
 
-        protected override void OnStart()
-        {
+
+            // ViewModel resolution in the constructor for UWP App
             var viewModel = Container.Resolve<TakePhotoViewModel>();
             MainPage = new TakePhotoPage()
             {
                 BindingContext = viewModel
             };
+        }
+
+        protected override void OnStart()
+        {
+          
         }
     }
 }
