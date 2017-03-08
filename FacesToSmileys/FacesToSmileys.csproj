@@ -149,9 +149,9 @@
       <Project>{1daf1701-5c3e-44dc-8bed-b1c1acd44516}</Project>
       <Name>FacesToSmileys.ViewModels</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FaceToSmileys.Services\FaceToSmileys.Services.csproj">
-      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
-      <Name>FaceToSmileys.Services</Name>
+    <ProjectReference Include="..\FacesToSmileys.Services\FacesToSmileys.Services.csproj">
+      <Project>{1EBEA891-9C4C-4D71-85CB-ED6105B18499}</Project>
+      <Name>FacesToSmileys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
