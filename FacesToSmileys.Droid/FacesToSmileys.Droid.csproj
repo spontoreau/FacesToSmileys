@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FacesToSmileys.Droid</RootNamespace>
     <AssemblyName>FacesToSmileys.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -16,6 +16,7 @@
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
     <AndroidUseLatestPlatformSdk>true</AndroidUseLatestPlatformSdk>
+    <AndroidTlsProvider></AndroidTlsProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -28,13 +29,7 @@
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-    <BundleAssemblies>False</BundleAssemblies>
-    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
     <Debugger>Xamarin</Debugger>
-    <AotAssemblies>False</AotAssemblies>
-    <EnableLLVM>False</EnableLLVM>
-    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
-    <EnableProguard>False</EnableProguard>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -190,9 +185,9 @@
       <Project>{CC8FBC3D-FDC7-4332-9415-BAF0A31A53FB}</Project>
       <Name>FacesToSmileys</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FaceToSmileys.Services\FaceToSmileys.Services.csproj">
-      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
-      <Name>FaceToSmileys.Services</Name>
+    <ProjectReference Include="..\FacesToSmileys.Services\FacesToSmileys.Services.csproj">
+      <Project>{1EBEA891-9C4C-4D71-85CB-ED6105B18499}</Project>
+      <Name>FacesToSmileys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

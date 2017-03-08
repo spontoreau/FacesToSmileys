@@ -197,9 +197,9 @@
       <Project>{CC8FBC3D-FDC7-4332-9415-BAF0A31A53FB}</Project>
       <Name>FacesToSmileys</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FaceToSmileys.Services\FaceToSmileys.Services.csproj">
-      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
-      <Name>FaceToSmileys.Services</Name>
+    <ProjectReference Include="..\FacesToSmileys.Services\FacesToSmileys.Services.csproj">
+      <Project>{1EBEA891-9C4C-4D71-85CB-ED6105B18499}</Project>
+      <Name>FacesToSmileys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
