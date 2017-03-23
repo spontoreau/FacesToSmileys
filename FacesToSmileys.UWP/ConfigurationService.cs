@@ -13,23 +13,21 @@ namespace FacesToSmileys.UWP
 {
     class ConfigurationService : IConfigurationService
     {
-        public async Task<Secret> GetSecretAsync()
+
+        public Secret GetSecret()
         {
-            var secretFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\secret.json");
-            string json = await Windows.Storage.FileIO.ReadTextAsync(secretFile);
+            string json = null;
+
+            Task.Run(async () =>
+            {
+                var secretFile = await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFileAsync(@"Assets\secret.json");
+                json = await Windows.Storage.FileIO.ReadTextAsync(secretFile);
+            }).Wait();
 
             return JsonConvert.DeserializeObject<Secret>(json, new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
-
-
-        }
-
-        public Secret GetSecret()
-        {
-            return new Secret { Cognitive = "uwp",
-                MobileCenter = "uwp" };
         }
     }
 }
