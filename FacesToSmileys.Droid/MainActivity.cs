@@ -7,7 +7,7 @@ using FacesToSmileys.Services;
 
 namespace FacesToSmileys.Droid
 {
-    [Activity(ScreenOrientation = ScreenOrientation.SensorLandscape, MainLauncher = false, Label = "FacesToSmileys.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(ScreenOrientation = ScreenOrientation.FullSensor, MainLauncher = false, Label = "FacesToSmileys.Droid", Icon = "@drawable/icon", Theme = "@style/MyTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle bundle)
