@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using FacesToSmileys.Dependencies;
-using FacesToSmileys.Pages;
+using FacesToSmileys.Views;
 using FacesToSmileys.ViewModels;
 using Xamarin.Forms;
 
@@ -21,7 +21,7 @@ namespace FacesToSmileys
 
             // ViewModel resolution in the constructor for UWP App
             var viewModel = Container.Resolve<TakePhotoViewModel>();
-            MainPage = new TakePhotoPage()
+            MainPage = new TakePhotoView
             {
                 BindingContext = viewModel
             };
