@@ -15,9 +15,7 @@ namespace FacesToSmileys
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterModule<ViewModelModule>();
-            containerBuilder.RegisterModule<ExternalModule>();
             Container = containerBuilder.Build();
-
 
             // ViewModel resolution in the constructor for UWP App
             var viewModel = Container.Resolve<TakePhotoViewModel>();

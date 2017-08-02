@@ -67,7 +67,6 @@
     </Compile>
     <Compile Include="Dependencies\ServiceModule.cs" />
     <Compile Include="Dependencies\ViewModelModule.cs" />
-    <Compile Include="Dependencies\ExternalModule.cs" />
     <Compile Include="ViewModels\TakePhotoViewModel.cs" />
     <Compile Include="Services\IAnalyticService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />
