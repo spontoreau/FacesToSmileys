@@ -175,10 +175,6 @@
     <AndroidResource Include="Resources\drawable\splash.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacesToSmileys.Models\FacesToSmileys.Models.csproj">
-      <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
-      <Name>FacesToSmileys.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FacesToSmileys\FacesToSmileys.csproj">
       <Project>{CC8FBC3D-FDC7-4332-9415-BAF0A31A53FB}</Project>
       <Name>FacesToSmileys</Name>

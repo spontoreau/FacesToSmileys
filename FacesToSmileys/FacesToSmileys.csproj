@@ -80,6 +80,10 @@
     <Compile Include="Services\Implementations\FileService.cs" />
     <Compile Include="Services\Implementations\ImageProcessingService.cs" />
     <Compile Include="Services\Implementations\PhotoService.cs" />
+    <Compile Include="Models\Detection.cs" />
+    <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\Rectangle.cs" />
+    <Compile Include="Models\Secret.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -151,12 +155,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacesToSmileys.Models\FacesToSmileys.Models.csproj">
-      <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
-      <Name>FacesToSmileys.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AdditionalFiles Include="photo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
@@ -164,6 +162,7 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="Services\Implementations\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
