@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using Xamarin.Forms;
 
-namespace FacesToSmileys.Converters
+namespace FacesToSmileys.Views.Converters
 {
     /// <summary>
     /// Byte array to image converter

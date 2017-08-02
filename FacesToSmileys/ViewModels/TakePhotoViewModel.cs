@@ -1,15 +1,14 @@
-﻿using System.Reactive;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using FacesToSmileys.Services;
-using ReactiveUI;
+using Xamarin.Forms;
 
 namespace FacesToSmileys.ViewModels
 {
     /// <summary>
     /// Take photo ViewModel.
     /// </summary>
-    public class TakePhotoViewModel : ReactiveObject
+    public class TakePhotoViewModel : ViewModelBase
     {
         /// <summary>
         /// Gets the photo service.
@@ -41,21 +40,29 @@ namespace FacesToSmileys.ViewModels
         /// <value>The file service.</value>
         IFileService FileService { get; }
 
-        ObservableAsPropertyHelper<byte[]> _photo;
+        byte[] _photo;
 
         /// <summary>
         /// Gets or sets the photo.
         /// </summary>
         /// <value>The photo.</value>
-        public byte[] Photo => _photo.Value;
+        public byte[] Photo
+        {
+            get => _photo;
+            set => Set(nameof(Photo), ref _photo, value);
+        }
 
-        ObservableAsPropertyHelper<bool> _isBusy;
+        bool _isBusy;
 
         /// <summary>
         /// Gets a value indicating whether this <see cref="T:FacesToSmileys.ViewModels.TakePhotoViewModel"/> is busy.
         /// </summary>
         /// <value><c>true</c> if is busy; otherwise, <c>false</c>.</value>
-        public bool IsBusy => _isBusy.Value;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => Set(nameof(IsBusy), ref _isBusy, value);
+        }
 
         /// <summary>
         /// Gets the take photo command.
@@ -82,32 +89,23 @@ namespace FacesToSmileys.ViewModels
             FileService = fileService;
             AnalyticService = analyticService;
 
-            Initialize();
+            TakePhotoCommand = new Command(async () => await TakePhoto());
         }
-
-        /// <summary>
-        /// Initialize this instance.
-        /// </summary>
-        void Initialize()
-        {
-            var command = ReactiveCommand.CreateFromTask<Unit, byte[]>((u) => TakePhoto());
-
-            _photo = command.ToProperty(this, x => x.Photo, new byte[0]);
-            _isBusy = command.IsExecuting.ToProperty(this, x => x.IsBusy, false);
-
-            TakePhotoCommand = command;
-        }
-
+        
         /// <summary>
         /// Takes the photo.
         /// </summary>
         /// <returns>The photo.</returns>
-        public async Task<byte[]> TakePhoto()
+        public async Task TakePhoto()
         {
+            IsBusy = true;
             var photo = await PhotoService.TaskPhotoAsync();
 
             if (photo.Length == 0)
-                return photo;
+            {
+                Photo = photo;
+                return;
+            }
 
             // Track Camera usage
             AnalyticService.Track("Photo taken");
@@ -129,7 +127,8 @@ namespace FacesToSmileys.ViewModels
             var finalImage = ImageProcessingService.GetImage();
             ImageProcessingService.Close();
 
-            return finalImage;
+            Photo = finalImage;
+            IsBusy = false;
         }
     }
 }
