@@ -17,6 +17,7 @@ namespace FacesToSmileys
 			builder.RegisterType<ImageProcessingService>().As<IImageProcessingService>();
 			builder.RegisterType<PhotoService>().As<IPhotoService>();
 			builder.RegisterType<AnalyticSercice>().As<IAnalyticService>();
+            builder.RegisterType<ConfigurationService>().As<IConfigurationService>();
 			builder.RegisterType<TakePhotoViewModel>().OnActivated(e => e.Context.InjectUnsetProperties(e.Instance));
             var container = builder.Build();
 
