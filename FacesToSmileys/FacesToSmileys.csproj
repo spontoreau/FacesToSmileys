@@ -73,6 +73,7 @@
     <Compile Include="Dependencies\ViewModelModule.cs" />
     <Compile Include="Services\AnalyticService.cs" />
     <Compile Include="Dependencies\ExternalModule.cs" />
+    <Compile Include="ViewModels\TakePhotoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Splat, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,10 +149,6 @@
       <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
       <Name>FacesToSmileys.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FacesToSmileys.ViewModels\FacesToSmileys.ViewModels.csproj">
-      <Project>{1daf1701-5c3e-44dc-8bed-b1c1acd44516}</Project>
-      <Name>FacesToSmileys.ViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FacesToSmileys.Services\FacesToSmileys.Services.csproj">
       <Project>{1EBEA891-9C4C-4D71-85CB-ED6105B18499}</Project>
       <Name>FacesToSmileys.Services</Name>
@@ -161,6 +158,9 @@
     <AdditionalFiles Include="photo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AdditionalFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('packages\Xamarin.Forms.2.3.1.114\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />
