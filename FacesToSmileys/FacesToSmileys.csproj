@@ -65,8 +65,6 @@
     <Compile Include="Views\TakePhotoPage.xaml.cs">
       <DependentUpon>TakePhotoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dependencies\ServiceModule.cs" />
-    <Compile Include="Dependencies\ViewModelModule.cs" />
     <Compile Include="ViewModels\TakePhotoViewModel.cs" />
     <Compile Include="Services\IAnalyticService.cs" />
     <Compile Include="Services\IConfigurationService.cs" />

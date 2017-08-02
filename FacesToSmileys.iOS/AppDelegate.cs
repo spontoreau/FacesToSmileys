@@ -1,7 +1,5 @@
 ﻿using Foundation;
 using UIKit;
-using FacesToSmileys.Dependencies;
-using FacesToSmileys.Services;
 
 namespace FacesToSmileys.iOS
 {

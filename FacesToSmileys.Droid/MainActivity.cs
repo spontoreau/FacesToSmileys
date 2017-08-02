@@ -1,9 +1,6 @@
-﻿
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using FacesToSmileys.Dependencies;
-using FacesToSmileys.Services;
 
 namespace FacesToSmileys.Droid
 {
