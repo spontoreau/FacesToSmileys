@@ -16,7 +16,6 @@ namespace FacesToSmileys.iOS
 #if ENABLE_TEST_CLOUD
             Xamarin.Calabash.Start();
 #endif
-            ExternalModule.Register<IConfigurationService, ConfigurationService>();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

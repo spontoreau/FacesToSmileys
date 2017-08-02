@@ -19,7 +19,6 @@ namespace FacesToSmileys.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            ExternalModule.Register<IConfigurationService, ConfigurationService>();
             LoadApplication(new App());
         }
     }

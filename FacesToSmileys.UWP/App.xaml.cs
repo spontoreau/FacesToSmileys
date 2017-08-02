@@ -61,7 +61,6 @@ namespace FacesToSmileys.UWP
              
 
                 Xamarin.Forms.Forms.Init(e);
-                ExternalModule.Register<IConfigurationService, ConfigurationService>();
                 
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)

@@ -57,6 +57,7 @@
     <EmbeddedResource Include="Resources\surprise.png">
       <LogicalName>surprise.png</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="secret.json" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Models\Secret.cs" />
     <Compile Include="Views\Converters\BytesToImageSourceConverter.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Services\Implementations\ConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

@@ -153,7 +153,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ConfigurationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FacesToSmileys\FacesToSmileys.csproj">

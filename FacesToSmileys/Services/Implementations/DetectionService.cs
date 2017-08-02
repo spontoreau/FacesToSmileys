@@ -33,7 +33,7 @@ namespace FacesToSmileys.Services.Implementations
         /// <returns>Collection of detections</returns>
         public async Task<IList<Detection>> DetectAsync(byte[] image)
         {
-            var cognitiveKey = ConfigurationService.GetSecret().Cognitive;
+            var cognitiveKey = ConfigurationService.Secret.Cognitive;
             var emotionServiceClient = new EmotionServiceClient(cognitiveKey);
 
             using(var stream = new MemoryStream(image))
