@@ -13,9 +13,9 @@ namespace FacesToSmileys
         {
             var container = new Container();
             container.Register<IDetectionService, DetectionService>();
-			container.Register<IFileService, FileService>();
-			container.Register<IImageProcessingService, ImageProcessingService>();
-			container.Register<IPhotoService, PhotoService>();
+            container.Register<IFileService, FileService>();
+            container.Register<IImageProcessingService, ImageProcessingService>();
+            container.Register<IPhotoService, PhotoService>();
             container.Register<IAnalyticService, AnalyticSercice>();
             container.Register<IConfigurationService, ConfigurationService>();
             container.Register<TakePhotoViewModel>();
