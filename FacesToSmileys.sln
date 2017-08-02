@@ -8,10 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacesToSmileys.Droid", "Fac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacesToSmileys.iOS", "FacesToSmileys.iOS\FacesToSmileys.iOS.csproj", "{ED91FBA1-5FEF-48CF-AB7C-4BD517D28155}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Application", "1-Application", "{49806782-AC64-4A34-B95F-ECB594D24489}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Platform", "2-Platform", "{360767CA-A0B9-48CF-BF8B-292A1D00A2CA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacesToSmileys.UWP", "FacesToSmileys.UWP\FacesToSmileys.UWP.csproj", "{B1AF7CFE-F40D-4135-9826-8404EADF7427}"
 EndProject
 Global
