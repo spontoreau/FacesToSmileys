@@ -3,7 +3,7 @@ using System.IO;
 using FacesToSmileys.Models;
 using SkiaSharp;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Image processing service
@@ -55,9 +55,9 @@ namespace FacesToSmileys.Services
                 }
             }
 
-            using(var data = new SKData(image))
+            using(var data = SKData.CreateCopy(image))
             {
-                Image = SKImage.FromData(new SKData(image));
+                Image = SKImage.FromEncodedData(SKData.CreateCopy(image));
             }
 
             Surface = SKSurface.Create(ImageInfo);
@@ -99,9 +99,9 @@ namespace FacesToSmileys.Services
         /// <param name="bounds">Drawing bounds</param>
         public void DrawImage(byte[] image, Rectangle bounds)
         {
-            using (var data = new SKData(image))
+            using (var data = SKData.CreateCopy(image))
             {
-                using (var skImage = SKImage.FromData(new SKData(image)))
+                using (var skImage = SKImage.FromEncodedData(SKData.CreateCopy(image)))
                 {
                     var xScale = bounds.Width / skImage.Width;
                     var yScale = bounds.Height / skImage.Height;
@@ -125,7 +125,7 @@ namespace FacesToSmileys.Services
             {
                 using (var snapShot = Surface.Snapshot())
                 {   
-                    using (var data = snapShot.Encode(SKImageEncodeFormat.Png, 80))
+                    using (var data = snapShot.Encode(SKEncodedImageFormat.Png, 80))
                     {
                         data.SaveTo(ms);
                     }

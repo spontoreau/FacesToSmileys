@@ -8,9 +8,9 @@ namespace FacesToSmileys.Services
     public interface IConfigurationService
     {
         /// <summary>
-        /// Gets secret keys.
+        /// Gets the secret keys.
         /// </summary>
-        /// <returns>Secret.</returns>
-        Secret GetSecret();
+        /// <value>The secret keys.</value>
+        Secret Secret { get; }
     }
 }

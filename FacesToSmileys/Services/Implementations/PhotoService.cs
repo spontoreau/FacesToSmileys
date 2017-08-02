@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Photo service

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacesToSmileys.Models;
 using Microsoft.ProjectOxford.Emotion;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Detection service
@@ -33,7 +33,7 @@ namespace FacesToSmileys.Services
         /// <returns>Collection of detections</returns>
         public async Task<IList<Detection>> DetectAsync(byte[] image)
         {
-            var cognitiveKey = ConfigurationService.GetSecret().Cognitive;
+            var cognitiveKey = ConfigurationService.Secret.Cognitive;
             var emotionServiceClient = new EmotionServiceClient(cognitiveKey);
 
             using(var stream = new MemoryStream(image))

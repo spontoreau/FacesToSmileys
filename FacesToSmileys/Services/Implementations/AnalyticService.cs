@@ -2,7 +2,7 @@
 using Microsoft.Azure.Mobile.Analytics;
 using Microsoft.Azure.Mobile.Crashes;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Analytic sercice.
@@ -22,7 +22,7 @@ namespace FacesToSmileys.Services
         /// </summary>
         public AnalyticSercice(IConfigurationService configurationService)
         {
-            MobileCenter.Configure(configurationService?.GetSecret()?.MobileCenter);
+            MobileCenter.Configure(configurationService.Secret.Analytic);
         }
 
         /// <summary>

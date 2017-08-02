@@ -1,6 +1,4 @@
-﻿using FacesToSmileys.Dependencies;
-using FacesToSmileys.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -61,7 +59,6 @@ namespace FacesToSmileys.UWP
              
 
                 Xamarin.Forms.Forms.Init(e);
-                ExternalModule.Register<IConfigurationService, ConfigurationService>();
                 
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
