@@ -22,7 +22,7 @@ namespace FacesToSmileys.Services.Implementations
         /// </summary>
         public AnalyticSercice(IConfigurationService configurationService)
         {
-            MobileCenter.Configure(configurationService.Secret.MobileCenter);
+            MobileCenter.Configure(configurationService.Secret.Analytic);
         }
 
         /// <summary>

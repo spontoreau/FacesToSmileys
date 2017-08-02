@@ -15,6 +15,6 @@
         /// Gets or sets the mobile center secret key.
         /// </summary>
         /// <value>The mobile center.</value>
-        public string MobileCenter { get; set; }
+        public string Analytic { get; set; }
     }
 }

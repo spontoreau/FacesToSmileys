@@ -23,7 +23,7 @@ namespace FacesToSmileys.Services.Implementations
         /// </summary>
         public ConfigurationService()
         {
-            using (var stream = GetType().GetTypeInfo().Assembly.GetManifestResourceStream(""))
+            using (var stream = GetType().GetTypeInfo().Assembly.GetManifestResourceStream("FacesToSmileys.secret.json"))
             {
                 using (var reader = new StreamReader(stream))
 				{
