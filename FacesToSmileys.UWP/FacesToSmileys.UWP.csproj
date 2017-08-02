@@ -130,21 +130,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FacesToSmileys.Models\FacesToSmileys.Models.csproj">
-      <Project>{4ff139e7-ec53-4a06-82de-42267d421a96}</Project>
-      <Name>FacesToSmileys.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacesToSmileys.ViewModels\FacesToSmileys.ViewModels.csproj">
-      <Project>{1daf1701-5c3e-44dc-8bed-b1c1acd44516}</Project>
-      <Name>FacesToSmileys.ViewModels</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FacesToSmileys\FacesToSmileys.csproj">
       <Project>{cc8fbc3d-fdc7-4332-9415-baf0a31a53fb}</Project>
       <Name>FacesToSmileys</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FacesToSmileys.Services\FacesToSmileys.Services.csproj">
-      <Project>{1ebea891-9c4c-4d71-85cb-ed6105b18499}</Project>
-      <Name>FacesToSmileys.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
