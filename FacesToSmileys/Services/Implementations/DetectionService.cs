@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using FacesToSmileys.Models;
 using Microsoft.ProjectOxford.Emotion;
 
-namespace FacesToSmileys.Services
+namespace FacesToSmileys.Services.Implementations
 {
     /// <summary>
     /// Detection service

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using FacesToSmileys.Services;
+using FacesToSmileys.Services.Implementations;
 
 namespace FacesToSmileys.Dependencies
 {
