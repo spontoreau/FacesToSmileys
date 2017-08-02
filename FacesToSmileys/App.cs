@@ -1,9 +1,9 @@
-﻿using Autofac;
-using FacesToSmileys.Views;
+﻿using FacesToSmileys.Views;
 using FacesToSmileys.ViewModels;
 using Xamarin.Forms;
 using FacesToSmileys.Services.Implementations;
 using FacesToSmileys.Services;
+using SimpleInjector;
 
 namespace FacesToSmileys
 {
@@ -11,19 +11,18 @@ namespace FacesToSmileys
     {
         public App()
         {
-            var builder = new ContainerBuilder();
-			builder.RegisterType<DetectionService>().As<IDetectionService>();
-			builder.RegisterType<FileService>().As<IFileService>();
-			builder.RegisterType<ImageProcessingService>().As<IImageProcessingService>();
-			builder.RegisterType<PhotoService>().As<IPhotoService>();
-			builder.RegisterType<AnalyticSercice>().As<IAnalyticService>();
-            builder.RegisterType<ConfigurationService>().As<IConfigurationService>();
-			builder.RegisterType<TakePhotoViewModel>().OnActivated(e => e.Context.InjectUnsetProperties(e.Instance));
-            var container = builder.Build();
+            var container = new Container();
+            container.Register<IDetectionService, DetectionService>();
+			container.Register<IFileService, FileService>();
+			container.Register<IImageProcessingService, ImageProcessingService>();
+			container.Register<IPhotoService, PhotoService>();
+            container.Register<IAnalyticService, AnalyticSercice>();
+            container.Register<IConfigurationService, ConfigurationService>();
+            container.Register<TakePhotoViewModel>();
 
             MainPage = new TakePhotoView
             {
-                BindingContext = container.Resolve<TakePhotoViewModel>()
+                BindingContext = container.GetInstance<TakePhotoViewModel>()
             };
         }
     }
