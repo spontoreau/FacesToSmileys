@@ -99,16 +99,13 @@ namespace FacesToSmileys.Services.Implementations
         /// <param name="bounds">Drawing bounds</param>
         public void DrawImage(byte[] image, Rectangle bounds)
         {
-            using (var data = SKData.CreateCopy(image))
+            using (var skImage = SKImage.FromEncodedData(SKData.CreateCopy(image)))
             {
-                using (var skImage = SKImage.FromEncodedData(SKData.CreateCopy(image)))
-                {
-                    var xScale = bounds.Width / skImage.Width;
-                    var yScale = bounds.Height / skImage.Height;
-                    Surface.Canvas.SetMatrix(SKMatrix.MakeScale(xScale, yScale));
-                    Surface.Canvas.DrawImage(skImage, bounds.X / xScale, bounds.Y / yScale);//We want to scale width & height, not X & Y
-                    Surface.Canvas.ResetMatrix();
-                }
+                var xScale = bounds.Width / skImage.Width;
+                var yScale = bounds.Height / skImage.Height;
+                Surface.Canvas.SetMatrix(SKMatrix.MakeScale(xScale, yScale));
+                Surface.Canvas.DrawImage(skImage, bounds.X / xScale, bounds.Y / yScale);//We want to scale width & height, not X & Y
+                Surface.Canvas.ResetMatrix();
             }
         }
 
