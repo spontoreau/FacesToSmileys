@@ -2,7 +2,7 @@
 ![VSTS](https://sypontor.visualstudio.com/_apis/public/build/definitions/1e8c6810-f557-42d6-8172-32978ca33bed/2/badge)
 
 ## What is FacesToSmileys?
-👦📷🙂 A Xamarin application which takes picture and converts faces to smileys
+👦 📷 🙂 A Xamarin application which takes picture and converts faces to smileys
 
 This application is built with:
 - [Xamarin](https://www.xamarin.com/) - Application development
