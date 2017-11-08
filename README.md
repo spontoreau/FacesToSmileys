@@ -14,7 +14,7 @@ This application is built with:
 This application was developed as a PoC for the *Microsoft DevOps Day* (Slides can be found [here](https://speakerdeck.com/spontoreau/devops-day-number-3-xamarin-au-coeur-de-la-transformation-digitale) - **FR only**)
 
 ## Availabilty in application stores
-After few months of inactivity, [Sébastien BOVO](https://github.com/sbovo) and [Sylvain PONTOREAU](https://github.com/sbovo) currently works on the source code to ship the application in stores. Application will be available in Apple Store first (end of summer).
+After few months of inactivity, [Sébastien BOVO](https://github.com/sbovo) and [Sylvain PONTOREAU](https://github.com/sbovo) currently works on the source code to ship the application in stores. Application will be available in Apple Store first (during winter).
 
 ## Licence
 MIT
